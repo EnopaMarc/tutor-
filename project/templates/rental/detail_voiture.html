@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ voiture.marque }} {{ voiture.modele }} - KMWT{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="breadcrumb">
+        <a href="{% url 'home' %}">Accueil</a> &gt; 
+        <span>{{ voiture.marque }} {{ voiture.modele }}</span>
+    </div>
+
+    <div class="car-detail">
+        <div class="car-detail-images">
+            {% if voiture.image %}
+                <img src="{{ voiture.image.url }}" alt="{{ voiture }}">
+            {% else %}
+                <img src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg" alt="{{ voiture }}">
+            {% endif %}
+        </div>
+        
+        <div class="car-detail-info">
+            <h1>{{ voiture.marque }} {{ voiture.modele }} ({{ voiture.annee }})</h1>
+            
+            <div class="car-badges">
+                <span class="badge badge-type">{{ voiture.get_type_display }}</span>
+                {% if voiture.disponible %}
+                    <span class="badge badge-available">Disponible</span>
+                {% else %}
+                    <span class="badge badge-unavailable">Non disponible</span>
+                {% endif %}
+            </div>
+            
+            <div class="car-price">
+                <span class="price">{{ voiture.prix_journalier }} €</span> / jour
+            </div>
+            
+            <div class="car-description">
+                <h3>Description</h3>
+                <p>{{ voiture.description|default:"Aucune description disponible pour ce véhicule." }}</p>
+            </div>
+            
+            <div class="car-specs">
+                <h3>Caractéristiques</h3>
+                <ul>
+                    <li><strong>Marque:</strong> {{ voiture.marque }}</li>
+                    <li><strong>Modèle:</strong> {{ voiture.modele }}</li>
+                    <li><strong>Année:</strong> {{ voiture.annee }}</li>
+                    <li><strong>Type:</strong> {{ voiture.get_type_display }}</li>
+                </ul>
+            </div>
+            
+            {% if voiture.disponible %}
+                {% if user.is_authenticated %}
+                    <div class="booking-form">
+                        <h3>Réserver ce véhicule</h3>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="form-group">
+                                    {{ form.date_debut.label_tag }}
+                                    {{ form.date_debut }}
+                                    {% if form.date_debut.errors %}
+                                        <div class="error">{{ form.date_debut.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group">
+                                    {{ form.date_fin.label_tag }}
+                                    {{ form.date_fin }}
+                                    {% if form.date_fin.errors %}
+                                        <div class="error">{{ form.date_fin.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            {% if form.non_field_errors %}
+                                <div class="error">
+                                    {% for error in form.non_field_errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            
+                            <button type="submit" class="btn-primary">Réserver maintenant</button>
+                        </form>
+                    </div>
+                {% else %}
+                    <div class="login-required">
+                        <p>Vous devez être connecté pour réserver ce véhicule.</p>
+                        <a href="{% url 'login' %}?next={% url 'detail_voiture' voiture.id %}" class="btn-primary">Se connecter</a>
+                        <a href="{% url 'inscription' %}" class="btn-secondary">Créer un compte</a>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="not-available-message">
+                    <p>Ce véhicule n'est pas disponible actuellement.</p>
+                    <a href="{% url 'home' %}" class="btn-secondary">Voir d'autres véhicules</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

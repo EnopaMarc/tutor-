@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+
+{% block title %}KMWT - Location de Voitures{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="slideshow-container">
+        <div class="slide fade">
+            <img src="https://images.pexels.com/photos/1149056/pexels-photo-1149056.jpeg" alt="Voiture de luxe">
+            <div class="slide-content">
+                <h2>La meilleure sélection de voitures</h2>
+                <p>Des véhicules adaptés à tous vos besoins</p>
+                <a href="#voitures" class="btn-primary">Découvrir</a>
+            </div>
+        </div>
+        <div class="slide fade">
+            <img src="https://images.pexels.com/photos/3912084/pexels-photo-3912084.jpeg" alt="SUV tout-terrain">
+            <div class="slide-content">
+                <h2>Des tout-terrains robustes</h2>
+                <p>Pour vos aventures en pleine nature</p>
+                <a href="#tout-terrains" class="btn-primary">Voir les tout-terrains</a>
+            </div>
+        </div>
+        <div class="slide fade">
+            <img src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg" alt="Voiture familiale">
+            <div class="slide-content">
+                <h2>Des voitures familiales spacieuses</h2>
+                <p>Confort et sécurité pour toute la famille</p>
+                <a href="#familiales" class="btn-primary">Voir les familiales</a>
+            </div>
+        </div>
+        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        <div class="dots-container">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </div>
+</section>
+
+<section class="search-section container">
+    <div class="search-card">
+        <h2>Rechercher une voiture</h2>
+        <form method="get" action="{% url 'home' %}" class="search-form">
+            <div class="form-group">
+                {{ form.type.label_tag }}
+                {{ form.type }}
+            </div>
+            <div class="form-group">
+                {{ form.marque.label_tag }}
+                {{ form.marque }}
+            </div>
+            <div class="form-check">
+                {{ form.disponible }}
+                {{ form.disponible.label_tag }}
+            </div>
+            <button type="submit" class="btn-primary">Rechercher</button>
+        </form>
+    </div>
+</section>
+
+<section id="tout-terrains" class="car-section container">
+    <h2>Nos tout-terrains</h2>
+    <div class="car-grid">
+        {% for voiture in tout_terrains %}
+            <div class="car-card">
+                <div class="car-image">
+                    {% if voiture.image %}
+                        <img src="{{ voiture.image.url }}" alt="{{ voiture }}">
+                    {% else %}
+                        <img src="https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg" alt="{{ voiture }}">
+                    {% endif %}
+                    {% if not voiture.disponible %}
+                        <div class="not-available">Non disponible</div>
+                    {% endif %}
+                </div>
+                <div class="car-details">
+                    <h3>{{ voiture.marque }} {{ voiture.modele }}</h3>
+                    <p class="car-type">{{ voiture.get_type_display }}</p>
+                    <p class="car-price">{{ voiture.prix_journalier }} € / jour</p>
+                    <a href="{% url 'detail_voiture' voiture.id %}" class="btn-secondary">Voir détails</a>
+                </div>
+            </div>
+        {% empty %}
+            <p class="no-results">Aucun tout-terrain disponible pour le moment.</p>
+        {% endfor %}
+    </div>
+    <div class="see-all">
+        <a href="#voitures" class="btn-text">Voir toutes nos voitures</a>
+    </div>
+</section>
+
+<section id="familiales" class="car-section container">
+    <h2>Nos voitures familiales</h2>
+    <div class="car-grid">
+        {% for voiture in familiales %}
+            <div class="car-card">
+                <div class="car-image">
+                    {% if voiture.image %}
+                        <img src="{{ voiture.image.url }}" alt="{{ voiture }}">
+                    {% else %}
+                        <img src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg" alt="{{ voiture }}">
+                    {% endif %}
+                    {% if not voiture.disponible %}
+                        <div class="not-available">Non disponible</div>
+                    {% endif %}
+                </div>
+                <div class="car-details">
+                    <h3>{{ voiture.marque }} {{ voiture.modele }}</h3>
+                    <p class="car-type">{{ voiture.get_type_display }}</p>
+                    <p class="car-price">{{ voiture.prix_journalier }} € / jour</p>
+                    <a href="{% url 'detail_voiture' voiture.id %}" class="btn-secondary">Voir détails</a>
+                </div>
+            </div>
+        {% empty %}
+            <p class="no-results">Aucune voiture familiale disponible pour le moment.</p>
+        {% endfor %}
+    </div>
+    <div class="see-all">
+        <a href="#voitures" class="btn-text">Voir toutes nos voitures</a>
+    </div>
+</section>
+
+<section id="voitures" class="car-section container">
+    <h2>Toutes nos voitures</h2>
+    <div class="car-grid">
+        {% for voiture in voitures %}
+            <div class="car-card">
+                <div class="car-image">
+                    {% if voiture.image %}
+                        <img src="{{ voiture.image.url }}" alt="{{ voiture }}">
+                    {% else %}
+                        <img src="https://images.pexels.com/photos/385997/pexels-photo-385997.jpeg" alt="{{ voiture }}">
+                    {% endif %}
+                    {% if not voiture.disponible %}
+                        <div class="not-available">Non disponible</div>
+                    {% endif %}
+                </div>
+                <div class="car-details">
+                    <h3>{{ voiture.marque }} {{ voiture.modele }}</h3>
+                    <p class="car-type">{{ voiture.get_type_display }}</p>
+                    <p class="car-price">{{ voiture.prix_journalier }} € / jour</p>
+                    <a href="{% url 'detail_voiture' voiture.id %}" class="btn-secondary">Voir détails</a>
+                </div>
+            </div>
+        {% empty %}
+            <p class="no-results">Aucune voiture ne correspond à vos critères.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% block extra_js %}
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Changement manuel des slides
+    function changeSlide(n) {
+        showSlides(slideIndex += n);
+    }
+
+    // Navigation par points
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("slide");
+        let dots = document.getElementsByClassName("dot");
+        
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+    }
+
+    // Changement automatique des slides
+    let slideInterval = setInterval(() => {
+        changeSlide(1);
+    }, 5000);
+
+    // Arrêter le défilement automatique quand l'utilisateur interagit
+    document.querySelector('.slideshow-container').addEventListener('mouseenter', () => {
+        clearInterval(slideInterval);
+    });
+
+    // Reprendre le défilement automatique
+    document.querySelector('.slideshow-container').addEventListener('mouseleave', () => {
+        slideInterval = setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+    });
+</script>
+{% endblock %}
+{% endblock %}

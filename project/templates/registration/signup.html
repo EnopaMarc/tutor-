@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Inscription - AutoLoc{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1>Créer un compte</h1>
+            
+            <form method="post" class="auth-form">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <div class="error">{{ form.username.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+                        {{ form.first_name }}
+                        {% if form.first_name.errors %}
+                            <div class="error">{{ form.first_name.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+                        {{ form.last_name }}
+                        {% if form.last_name.errors %}
+                            <div class="error">{{ form.last_name.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <div class="error">{{ form.email.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+                    {{ form.password1 }}
+                    {% if form.password1.errors %}
+                        <div class="error">{{ form.password1.errors }}</div>
+                    {% endif %}
+                    <div class="form-help">
+                        <ul>
+                            <li>Votre mot de passe ne peut pas être trop similaire à vos autres informations personnelles.</li>
+                            <li>Votre mot de passe doit contenir au moins 8 caractères.</li>
+                            <li>Votre mot de passe ne peut pas être un mot de passe couramment utilisé.</li>
+                            <li>Votre mot de passe ne peut pas être entièrement numérique.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+                    {{ form.password2 }}
+                    {% if form.password2.errors %}
+                        <div class="error">{{ form.password2.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                {% if form.non_field_errors %}
+                    <div class="error">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
+                <button type="submit" class="btn-primary btn-large">S'inscrire</button>
+            </form>
+            
+            <div class="auth-links">
+                <p>Vous avez déjà un compte ? <a href="{% url 'login' %}">Se connecter</a></p>
+            </div>
+        </div>
+        
+        <div class="auth-image">
+            <img src="https://images.pexels.com/photos/3807386/pexels-photo-3807386.jpeg" alt="AutoLoc">
+        </div>
+    </div>
+</div>
+{% endblock %}

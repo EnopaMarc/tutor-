@@ -1,0 +1,1304 @@
+/* Variables */
+:root {
+    --primary-color: #1a73e8;
+    --primary-light: #e8f0fe;
+    --primary-dark: #0d47a1;
+    --secondary-color: #ff7900;
+    --secondary-light: #ffebcc;
+    --success-color: #34a853;
+    --warning-color: #fbbc05;
+    --error-color: #ea4335;
+    --gray-100: #f8f9fa;
+    --gray-200: #e9ecef;
+    --gray-300: #dee2e6;
+    --gray-400: #ced4da;
+    --gray-500: #adb5bd;
+    --gray-600: #6c757d;
+    --gray-700: #495057;
+    --gray-800: #343a40;
+    --gray-900: #212529;
+    --white: #ffffff;
+    --black: #000000;
+    --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+/* Reset et base */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.5;
+    color: var(--gray-900);
+    background-color: var(--gray-100);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Conteneur */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* Header et navigation */
+header {
+    background-color: var(--white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.logo a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+.logo a:hover {
+    color: var(--primary-dark);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--gray-800);
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+nav a:hover {
+    color: var(--primary-color);
+    background-color: var(--primary-light);
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--white) !important;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+    display: inline-block;
+    background-color: var(--white);
+    color: var(--primary-color) !important;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    border: 1px solid var(--primary-color);
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-light);
+}
+
+.btn-text {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--primary-color);
+    padding: 8px 16px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+}
+
+.btn-text:hover {
+    text-decoration: underline;
+}
+
+.btn-large {
+    padding: 12px 24px;
+    font-size: 1.125rem;
+}
+
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.mobile-menu-btn span {
+    width: 24px;
+    height: 3px;
+    background-color: var(--gray-800);
+    margin: 3px 0;
+    transition: var(--transition);
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    padding: 8px 16px;
+    background-color: var(--gray-100);
+    color: var(--gray-800);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.dropbtn:hover {
+    background-color: var(--gray-200);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: var(--white);
+    min-width: 160px;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    z-index: 1;
+    overflow: hidden;
+}
+
+.dropdown-content a {
+    color: var(--gray-800);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--gray-100);
+}
+
+.show {
+    display: block;
+}
+
+/* Main content */
+main {
+    flex: 1;
+    padding: 32px 0;
+}
+
+/* Messages */
+.messages {
+    margin-bottom: 24px;
+}
+
+.alert {
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    border-radius: var(--border-radius);
+    position: relative;
+}
+
+.alert .close-btn {
+    position: absolute;
+    right: 16px;
+    top: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.alert-success {
+    background-color: rgba(52, 168, 83, 0.1);
+    color: var(--success-color);
+    border-left: 4px solid var(--success-color);
+}
+
+.alert-error {
+    background-color: rgba(234, 67, 53, 0.1);
+    color: var(--error-color);
+    border-left: 4px solid var(--error-color);
+}
+
+.alert-info {
+    background-color: rgba(26, 115, 232, 0.1);
+    color: var(--primary-color);
+    border-left: 4px solid var(--primary-color);
+}
+
+.alert-warning {
+    background-color: rgba(251, 188, 5, 0.1);
+    color: var(--warning-color);
+    border-left: 4px solid var(--warning-color);
+}
+
+/* Hero section avec slider */
+.hero {
+    margin-bottom: 40px;
+}
+
+.slideshow-container {
+    position: relative;
+    max-width: 100%;
+    height: 500px;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.75);
+}
+
+.slide-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: var(--white);
+    width: 80%;
+    max-width: 800px;
+}
+
+.slide-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.slide-content p {
+    font-size: 1.25rem;
+    margin-bottom: 24px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    font-weight: bold;
+    padding: 16px;
+    color: var(--white);
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition);
+    z-index: 2;
+}
+
+.prev {
+    left: 16px;
+}
+
+.next {
+    right: 16px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.dots-container {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.dot.active, .dot:hover {
+    background-color: var(--white);
+}
+
+/* Section de recherche */
+.search-section {
+    margin-bottom: 40px;
+}
+
+.search-card {
+    background-color: var(--white);
+    padding: 24px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.search-card h2 {
+    margin-bottom: 16px;
+    color: var(--gray-800);
+}
+
+.search-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--gray-700);
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.form-check input {
+    width: 18px;
+    height: 18px;
+}
+
+.form-check label {
+    font-weight: 500;
+    color: var(--gray-700);
+}
+
+/* Section de voitures */
+.car-section {
+    margin-bottom: 40px;
+}
+
+.car-section h2 {
+    margin-bottom: 24px;
+    color: var(--gray-800);
+    font-size: 1.75rem;
+}
+
+.car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.car-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.car-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.car-image {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.car-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.car-card:hover .car-image img {
+    transform: scale(1.05);
+}
+
+.not-available {
+    position: absolute;
+    top: 16px;
+    right: 0;
+    background-color: var(--error-color);
+    color: var(--white);
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.car-details {
+    padding: 16px;
+}
+
+.car-details h3 {
+    margin-bottom: 8px;
+    font-size: 1.25rem;
+    color: var(--gray-800);
+}
+
+.car-type {
+    color: var(--gray-600);
+    margin-bottom: 12px;
+    font-size: 0.875rem;
+}
+
+.car-price {
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+    font-size: 1.125rem;
+}
+
+.see-all {
+    margin-top: 24px;
+    text-align: center;
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 32px;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    color: var(--gray-600);
+}
+
+/* Page de détail voiture */
+.breadcrumb {
+    margin-bottom: 16px;
+    color: var(--gray-600);
+}
+
+.breadcrumb a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.car-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 40px;
+}
+
+.car-detail-images {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    height: 400px;
+}
+
+.car-detail-images img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.car-detail-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.car-detail-info h1 {
+    margin-bottom: 16px;
+    font-size: 2rem;
+    color: var(--gray-800);
+}
+
+.car-badges {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.badge {
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.badge-type {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+}
+
+.badge-available {
+    background-color: rgba(52, 168, 83, 0.1);
+    color: var(--success-color);
+}
+
+.badge-unavailable {
+    background-color: rgba(234, 67, 53, 0.1);
+    color: var(--error-color);
+}
+
+.car-price {
+    margin-bottom: 24px;
+}
+
+.car-price .price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.car-description, .car-specs {
+    margin-bottom: 24px;
+}
+
+.car-description h3, .car-specs h3 {
+    margin-bottom: 8px;
+    color: var(--gray-800);
+    font-size: 1.25rem;
+}
+
+.car-specs ul {
+    list-style: none;
+}
+
+.car-specs li {
+    margin-bottom: 8px;
+}
+
+.car-specs strong {
+    color: var(--gray-700);
+}
+
+.booking-form, .login-required, .not-available-message {
+    padding: 24px;
+    background-color: var(--gray-100);
+    border-radius: var(--border-radius);
+    margin-top: auto;
+}
+
+.booking-form h3, .login-required h3 {
+    margin-bottom: 16px;
+    color: var(--gray-800);
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+}
+
+.login-required p, .not-available-message p {
+    margin-bottom: 16px;
+}
+
+.error {
+    color: var(--error-color);
+    font-size: 0.875rem;
+    margin-top: 4px;
+}
+
+/* Page de paiement */
+.payment-page {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.payment-page h1 {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.payment-summary {
+    background-color: var(--white);
+    padding: 24px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 32px;
+}
+
+.payment-summary h2 {
+    margin-bottom: 16px;
+    color: var(--gray-800);
+    font-size: 1.25rem;
+}
+
+.summary-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.summary-row.total {
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding-top: 8px;
+    border-top: 2px solid var(--gray-300);
+    border-bottom: none;
+}
+
+.payment-form-container {
+    background-color: var(--white);
+    padding: 24px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.payment-form-container h2 {
+    margin-bottom: 8px;
+    color: var(--gray-800);
+    font-size: 1.25rem;
+}
+
+.payment-notice {
+    color: var(--gray-600);
+    margin-bottom: 16px;
+    padding: 8px 12px;
+    background-color: rgba(251, 188, 5, 0.1);
+    border-left: 3px solid var(--warning-color);
+    border-radius: 4px;
+}
+
+.card-icons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.card-icon {
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.visa {
+    background-color: #1a1f71;
+    color: var(--white);
+}
+
+.mastercard {
+    background-color: #eb001b;
+    color: var(--white);
+}
+
+.payment-form {
+    margin-bottom: 16px;
+}
+
+.form-hint {
+    font-size: 0.75rem;
+    color: var(--gray-600);
+    margin-top: 4px;
+}
+
+.secure-payment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+    color: var(--gray-600);
+    font-size: 0.875rem;
+}
+
+.icon-lock::before {
+    content: "🔒";
+}
+
+.cancel-reservation {
+    text-align: center;
+    margin-top: 24px;
+}
+
+/* Page de confirmation */
+.confirmation-page {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.confirmation-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.success-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background-color: var(--success-color);
+    color: var(--white);
+    font-size: 2.5rem;
+    border-radius: 50%;
+    margin-bottom: 16px;
+}
+
+.confirmation-header h1 {
+    margin-bottom: 8px;
+    color: var(--success-color);
+}
+
+.confirmation-header p {
+    color: var(--gray-600);
+    font-size: 1.125rem;
+}
+
+.confirmation-details, .next-steps {
+    margin-bottom: 40px;
+}
+
+.confirmation-details h2, .next-steps h2 {
+    margin-bottom: 24px;
+    text-align: center;
+    color: var(--gray-800);
+}
+
+.confirmation-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 24px;
+    display: flex;
+    gap: 24px;
+}
+
+.car-info {
+    flex: 2;
+}
+
+.car-info h3 {
+    margin-bottom: 8px;
+    font-size: 1.5rem;
+}
+
+.reservation-info {
+    margin-top: 24px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background-color: rgba(26, 115, 232, 0.1);
+    color: var(--primary-color);
+}
+
+.car-image {
+    flex: 1;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    height: 200px;
+}
+
+.steps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+}
+
+.step {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.step-icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.step-content h3 {
+    margin-bottom: 8px;
+    color: var(--gray-800);
+}
+
+.confirmation-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+/* Page de mes locations */
+.my-reservations {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.my-reservations h1 {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.reservation-filters {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: none;
+    background-color: var(--gray-200);
+    color: var(--gray-700);
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.reservation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.reservation-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+}
+
+.reservation-header {
+    padding: 16px;
+    background-color: var(--gray-100);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reservation-header h3 {
+    font-size: 1.125rem;
+    color: var(--gray-800);
+    margin: 0;
+}
+
+.reservation-date {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+}
+
+.reservation-body {
+    padding: 16px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.car-details {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.car-details img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
+.car-details h4 {
+    margin-bottom: 4px;
+    color: var(--gray-800);
+}
+
+.reservation-details {
+    flex: 2;
+    min-width: 250px;
+}
+
+.details-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+}
+
+.status-AT {
+    background-color: rgba(251, 188, 5, 0.1);
+    color: var(--warning-color);
+}
+
+.status-EC {
+    background-color: rgba(26, 115, 232, 0.1);
+    color: var(--primary-color);
+}
+
+.status-TR {
+    background-color: rgba(52, 168, 83, 0.1);
+    color: var(--success-color);
+}
+
+.status-AN {
+    background-color: rgba(234, 67, 53, 0.1);
+    color: var(--error-color);
+}
+
+.reservation-actions {
+    padding: 16px;
+    border-top: 1px solid var(--gray-200);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.info-text {
+    color: var(--gray-600);
+    font-style: italic;
+}
+
+.no-reservations {
+    text-align: center;
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+}
+
+.no-reservations h2 {
+    margin-bottom: 8px;
+    color: var(--gray-800);
+}
+
+.no-reservations p {
+    margin-bottom: 24px;
+    color: var(--gray-600);
+}
+
+/* Auth pages */
+.auth-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 600px;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background-color: var(--white);
+}
+
+.auth-card {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-card h1 {
+    margin-bottom: 24px;
+    color: var(--gray-800);
+    text-align: center;
+}
+
+.auth-form {
+    margin-bottom: 24px;
+}
+
+.auth-links {
+    margin-top: auto;
+    text-align: center;
+}
+
+.auth-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+.auth-image {
+    height: 100%;
+}
+
+.auth-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.error-message {
+    background-color: rgba(234, 67, 53, 0.1);
+    color: var(--error-color);
+    padding: 12px;
+    border-radius: var(--border-radius);
+    margin-bottom: 16px;
+}
+
+.form-help {
+    font-size: 0.75rem;
+    color: var(--gray-600);
+    margin-top: 4px;
+}
+
+.form-help ul {
+    padding-left: 16px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--gray-800);
+    color: var(--white);
+    padding: 48px 0 24px;
+    margin-top: auto;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 32px;
+    margin-bottom: 32px;
+}
+
+.footer-section h3 {
+    color: var(--white);
+    margin-bottom: 16px;
+    font-size: 1.25rem;
+}
+
+.footer-section p {
+    color: var(--gray-400);
+    margin-bottom: 8px;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section a {
+    color: var(--gray-400);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-section a:hover {
+    color: var(--white);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid var(--gray-700);
+    color: var(--gray-500);
+    font-size: 0.875rem;
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+    .car-detail {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .confirmation-card {
+        flex-direction: column;
+    }
+    
+    .auth-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .auth-image {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        flex-direction: column;
+        padding: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    nav ul.active {
+        display: flex;
+    }
+    
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
+    .mobile-menu-btn.active span:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    
+    .mobile-menu-btn.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .mobile-menu-btn.active span:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+    
+    .slideshow-container {
+        height: 400px;
+    }
+    
+    .slide-content h2 {
+        font-size: 1.75rem;
+    }
+    
+    .slide-content p {
+        font-size: 1rem;
+    }
+    
+    .search-form {
+        flex-direction: column;
+    }
+    
+    .form-row {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 576px) {
+    .slideshow-container {
+        height: 300px;
+    }
+    
+    .slide-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .step {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .step-icon {
+        margin: 0 auto 16px;
+    }
+    
+    .confirmation-actions {
+        flex-direction: column;
+    }
+    
+    .car-detail-images {
+        height: 250px;
+    }
+}

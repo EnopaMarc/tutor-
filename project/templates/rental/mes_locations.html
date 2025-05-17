@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}Mes Locations - KMWT{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="my-reservations">
+        <h1>Mes Locations</h1>
+        
+        {% if locations %}
+            <div class="reservation-filters">
+                <button class="filter-btn active" data-filter="all">Toutes</button>
+                <button class="filter-btn" data-filter="AT">En attente</button>
+                <button class="filter-btn" data-filter="EC">En cours</button>
+                <button class="filter-btn" data-filter="TR">Terminées</button>
+                <button class="filter-btn" data-filter="AN">Annulées</button>
+            </div>
+            
+            <div class="reservation-list">
+                {% for location in locations %}
+                    <div class="reservation-card" data-status="{{ location.statut }}">
+                        <div class="reservation-header">
+                            <h3>Réservation #{{ location.id }}</h3>
+                            <span class="reservation-date">{{ location.date_creation|date:"d/m/Y" }}</span>
+                        </div>
+                        
+                        <div class="reservation-body">
+                            <div class="car-details">
+                                {% if location.voiture.image %}
+                                    <img src="{{ location.voiture.image.url }}" alt="{{ location.voiture }}">
+                                {% else %}
+                                    <img src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg" alt="{{ location.voiture }}">
+                                {% endif %}
+                                <div>
+                                    <h4>{{ location.voiture.marque }} {{ location.voiture.modele }}</h4>
+                                    <p class="car-type">{{ location.voiture.get_type_display }}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="reservation-details">
+                                <div class="details-row">
+                                    <span>Période:</span>
+                                    <span>{{ location.date_debut }} au {{ location.date_fin }}</span>
+                                </div>
+                                <div class="details-row">
+                                    <span>Statut:</span>
+                                    <span class="status-badge status-{{ location.statut }}">{{ location.get_statut_display }}</span>
+                                </div>
+                                <div class="details-row">
+                                    <span>Montant:</span>
+                                    <span>{{ location.montant_total }} €</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="reservation-actions">
+                            {% if location.statut == 'AT' %}
+                                <a href="{% url 'paiement' location.id %}" class="btn-primary">Finaliser le paiement</a>
+                                <a href="{% url 'annuler_location' location.id %}" class="btn-secondary">Annuler</a>
+                            {% elif location.statut == 'EC' %}
+                                <span class="info-text">Véhicule en cours de location</span>
+                            {% elif location.statut == 'TR' %}
+                                <a href="{% url 'detail_voiture' location.voiture.id %}" class="btn-secondary">Réserver à nouveau</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-reservations">
+                <div class="empty-state-icon">🚗</div>
+                <h2>Vous n'avez pas encore de locations</h2>
+                <p>Découvrez notre sélection de véhicules et réservez dès maintenant !</p>
+                <a href="{% url 'home' %}" class="btn-primary">Voir les véhicules disponibles</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    // Filtrage des réservations
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Activer le bouton cliqué
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const filter = btn.getAttribute('data-filter');
+            
+            // Filtrer les cartes de réservation
+            document.querySelectorAll('.reservation-card').forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-status') === filter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

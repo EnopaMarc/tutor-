@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}Paiement - KMWT{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="payment-page">
+        <h1>Finaliser votre location</h1>
+        
+        <div class="payment-summary">
+            <h2>Résumé de votre réservation</h2>
+            
+            <div class="summary-details">
+                <div class="summary-row">
+                    <span>Véhicule:</span>
+                    <span>{{ location.voiture.marque }} {{ location.voiture.modele }}</span>
+                </div>
+                <div class="summary-row">
+                    <span>Période:</span>
+                    <span>Du {{ location.date_debut }} au {{ location.date_fin }}</span>
+                </div>
+                <div class="summary-row">
+                    <span>Durée:</span>
+                    <span>{{ location.date_fin|timeuntil:location.date_debut }}</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Montant total:</span>
+                    <span>{{ location.montant_total }} €</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="payment-form-container">
+            <h2>Informations de paiement</h2>
+            <p class="payment-notice">Ceci est une simulation de paiement (Mode test). Aucun prélèvement réel ne sera effectué.</p>
+            
+            <div class="card-icons">
+                <span class="card-icon visa">Visa</span>
+                <span class="card-icon mastercard">MasterCard</span>
+            </div>
+            
+            <form method="post" class="payment-form">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    {{ form.nom_carte.label_tag }}
+                    {{ form.nom_carte }}
+                    {% if form.nom_carte.errors %}
+                        <div class="error">{{ form.nom_carte.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    {{ form.numero_carte.label_tag }}
+                    {{ form.numero_carte }}
+                    <p class="form-hint">Pour tester, utilisez 4242 4242 4242 4242</p>
+                    {% if form.numero_carte.errors %}
+                        <div class="error">{{ form.numero_carte.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        {{ form.mois_expiration.label_tag }}
+                        {{ form.mois_expiration }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.annee_expiration.label_tag }}
+                        {{ form.annee_expiration }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.cvv.label_tag }}
+                        {{ form.cvv }}
+                        <p class="form-hint">Utilisez 123</p>
+                    </div>
+                </div>
+                
+                {% if form.non_field_errors %}
+                    <div class="error">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
+                <button type="submit" class="btn-primary btn-large">Payer {{ location.montant_total }} €</button>
+                <p class="secure-payment">
+                    <span class="icon-lock"></span> Paiement 100% sécurisé
+                </p>
+            </form>
+            
+            <div class="cancel-reservation">
+                <a href="{% url 'annuler_location' location.id %}" class="btn-text">Annuler cette réservation</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

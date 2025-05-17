@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirmation de réservation - KMWT{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="confirmation-page">
+        <div class="confirmation-header">
+            <div class="success-icon">✓</div>
+            <h1>Réservation confirmée !</h1>
+            <p>Votre paiement a été accepté et votre réservation est confirmée.</p>
+        </div>
+        
+        <div class="confirmation-details">
+            <h2>Détails de votre réservation</h2>
+            
+            <div class="confirmation-card">
+                <div class="car-info">
+                    <h3>{{ location.voiture.marque }} {{ location.voiture.modele }}</h3>
+                    <p class="car-type">{{ location.voiture.get_type_display }}</p>
+                    
+                    <div class="reservation-info">
+                        <div class="info-row">
+                            <span>Numéro de réservation:</span>
+                            <span>#{{ location.id }}</span>
+                        </div>
+                        <div class="info-row">
+                            <span>Date de début:</span>
+                            <span>{{ location.date_debut }}</span>
+                        </div>
+                        <div class="info-row">
+                            <span>Date de fin:</span>
+                            <span>{{ location.date_fin }}</span>
+                        </div>
+                        <div class="info-row">
+                            <span>Statut:</span>
+                            <span class="status-badge">{{ location.get_statut_display }}</span>
+                        </div>
+                        <div class="info-row">
+                            <span>Montant total:</span>
+                            <span>{{ location.montant_total }} €</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="car-image">
+                    {% if location.voiture.image %}
+                        <img src="{{ location.voiture.image.url }}" alt="{{ location.voiture }}">
+                    {% else %}
+                        <img src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg" alt="{{ location.voiture }}">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="next-steps">
+            <h2>Prochaines étapes</h2>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-icon">📧</div>
+                    <div class="step-content">
+                        <h3>Confirmation par email</h3>
+                        <p>Un email de confirmation a été envoyé à votre adresse email.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">🚗</div>
+                    <div class="step-content">
+                        <h3>Récupération du véhicule</h3>
+                        <p>Présentez-vous à notre agence le {{ location.date_debut }} avec une pièce d'identité et votre permis de conduire.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">📱</div>
+                    <div class="step-content">
+                        <h3>Suivi de votre location</h3>
+                        <p>Vous pouvez suivre le statut de votre location depuis votre espace personnel.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="confirmation-actions">
+            <a href="{% url 'mes_locations' %}" class="btn-primary">Voir mes locations</a>
+            <a href="{% url 'home' %}" class="btn-secondary">Retour à l'accueil</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

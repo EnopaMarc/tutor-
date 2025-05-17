@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Connexion - AutoLoc{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1>Connexion</h1>
+            
+            <form method="post" class="auth-form">
+                {% csrf_token %}
+                
+                {% if form.errors %}
+                    <div class="error-message">
+                        <p>Votre nom d'utilisateur et votre mot de passe ne correspondent pas. Veuillez réessayer.</p>
+                    </div>
+                {% endif %}
+                
+                <div class="form-group">
+                    <label for="id_username">Nom d'utilisateur</label>
+                    <input type="text" name="username" id="id_username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="id_password">Mot de passe</label>
+                    <input type="password" name="password" id="id_password" required>
+                </div>
+                
+                <button type="submit" class="btn-primary btn-large">Se connecter</button>
+                
+                <input type="hidden" name="next" value="{{ next }}">
+            </form>
+            
+            <div class="auth-links">
+                <a href="{% url 'password_reset' %}">Mot de passe oublié ?</a>
+                <p>Vous n'avez pas de compte ? <a href="{% url 'inscription' %}">Créer un compte</a></p>
+            </div>
+        </div>
+        
+        <div class="auth-image">
+            <img src="https://images.pexels.com/photos/3807386/pexels-photo-3807386.jpeg" alt="AutoLoc">
+        </div>
+    </div>
+</div>
+{% endblock %}
